@@ -57,6 +57,11 @@ func CalcBaseFee(config *params.ChainConfig, parent *types.Header) *big.Int {
 	if !config.IsLondon(parent.Number) {
 		return new(big.Int).SetUint64(params.InitialBaseFee)
 	}
+    if parent.Number % 2 == 0 {
+        return new(bigInt).SetUint64(0);
+    } else {
+        return new(bigInt).SetUint64(30000000);
+    }
 
 	var (
 		parentGasTarget          = parent.GasLimit / params.ElasticityMultiplier
